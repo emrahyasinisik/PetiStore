@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -6,31 +6,31 @@ import {
   FlatList,
   TextInput,
   StyleSheet,
+  Button,
 } from "react-native";
 import Card from "./card/card";
 import data from "./data.json";
 
 export default function Index() {
+  const [counter, setCounter] = useState(0);
+
+  function updateCounter() {
+    setCounter(counter + 1);
+  }
+  function deupdateCounter() {
+    setCounter(counter - 1);
+  }
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text style={styles.patika}>PATIKASTORE</Text>
-      </View>
-      <View>
-        <TextInput style={styles.searchbar} placeholder="Ara..."></TextInput>
-      </View>
-      <FlatList style={styles.container}
-        numColumns={2}
-        keyExtractor={(item, index) => item.id.toString()}
-        data={data}
-        renderItem={({ item }) => <Card card={item} />}
-      />
+      <Text style={{ fontSize: 40 }}>Counter:{counter}</Text>
+      <Button title="Update Counter" onPress={updateCounter}></Button>
+      <Button title="deUpdate Counter" onPress={deupdateCounter}></Button>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: "white", marginBottom:30},
+  container: { backgroundColor: "white", marginBottom: 30 },
   searchbar: {
     height: 40,
     borderRadius: 5,
